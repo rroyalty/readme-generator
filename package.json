@@ -1,0 +1,25 @@
+{
+  "name": "readme-generator",
+  "version": "1.0.0",
+  "description": "UNH Homework assignment - Generates good ReadMe's.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rroyalty/readme-generator.git"
+  },
+  "keywords": [
+    "readme"
+  ],
+  "author": "Ryan Royalty",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/rroyalty/readme-generator/issues"
+  },
+  "homepage": "https://github.com/rroyalty/readme-generator#readme",
+  "dependencies": {
+    "inquirer": "^7.3.3"
+  }
+}
