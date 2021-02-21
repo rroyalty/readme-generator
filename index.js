@@ -24,7 +24,7 @@ const newReadme = () => {
             readmeJSON["# Title"] = `# ${data.title}`;
             readmeJSON["## Table of Contents"] = "";
             data.sections.forEach((ele) => {
-                readmeJSON["## Table of Contents"] = `${readmeJSON["## Table of Contents"]}\n[${ele}](${ele})  `;
+                readmeJSON["## Table of Contents"] = `${readmeJSON["## Table of Contents"]}\n[${ele}](#${ele})  `;
                 readmeJSON[`### ${ele}`] = "";
             })
             commandMain();
