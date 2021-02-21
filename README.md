@@ -12,7 +12,7 @@
 
 ---
 <a name="Description"></a>  
-### Description test 
+### Description
 
 Paragraph one here!    
 Paragraph 2 here!  
