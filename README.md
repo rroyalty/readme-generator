@@ -1,4 +1,4 @@
-![https://img.shields.io/github/license/rroyalty/readme-generator]
+![badge](https://img.shields.io/github/license/rroyalty/readme-generator)
 
 # Ryan's ReadMe Generator  
 
