@@ -37,7 +37,7 @@ const newReadme = () => {
                 readmeJSON[`${ele}`] = "";
             }
             )
-            readmeJSON["Questions"] = `[GitHub](https://github.com/${data.github}/${data.repo})  \n[E-Mail](${data.email})`;
+            readmeJSON["Questions"] = `If you have any questions you can find my GitHub profile and E-Mail address below:  \n\n[GitHub](https://github.com/${data.github}/)  \n[E-Mail](${data.email})`;
             commandMain();
         }).catch((err) => {
             console.log(err);
@@ -51,44 +51,10 @@ const previewReadme = (title, toc, sections) => {
     return reduced;
 }
 
-const helpMenus = (parameter) => {
-    switch(!parameter === false) {
-        case true:
-            try {
-                if (!menus[parameter.toLowerCase()] === false) console.log(menus[parameter.toLowerCase()]);
-                else  {
-                    console.log("Not a valid help command\n")
-                    console.log(menus.help)
-                }
-            } catch {(err) => {
-                console.log(err)
-                console.log(menus.help)
-                };
-            }
-        break;
-        default:
-            console.log(menus.help);
-    }
+const helpMenus = () => {
+    console.log(menus.help);
 }
 
-const modifyParts = (parameter) => {
-    switch(!parameter === false) {
-        case true:
-            try {
-                if (!menus[parameter.toLowerCase()] === false) console.log(menus[parameter.toLowerCase()]);
-                else  {
-                    console.log("Not a modifiable part\n")
-                    console.log(`#${parameter}`)
-                }
-            } catch {(err) => {
-                console.log(err)
-                };
-            }
-        break;
-        default:
-            console.log(menus[parameter]);
-    }
-}
 
 const commandMain = () => {
     console.log(menus.base);
@@ -113,17 +79,19 @@ const commandMain = () => {
                     commandMain();
                 break;
                 case 'help':
-                    helpMenus(dataArr[1].split(" ")[1]);
+                    helpMenus();
                     commandMain();
                 break;
                 case 'modify':
-                    modifyParts(dataArr[0].split(" ")[1]);
                     commandModify();
                 break;
                 case 'save':
                     const contentArr = Object.entries(readmeJSON);
                     const content = previewReadme(contentArr[0], contentArr[1], contentArr.splice(2, contentArr.length - 2));
                     saveFile(content);
+                break;
+                case 'modify':
+                    commandClear(dataArr[0]);
                 break;
                 default:
                     console.log("Invalid command.")
@@ -223,46 +191,52 @@ const part2add = (part, section) => {
                 .prompt([{
                     type: 'input',
                     name: 'alt',
-                    message: '[Site Name]: ',
+                    message: '[Alt]: ',
                 }]).then((data) => {
                     const alt = data.alt;
                     inquirer
                         .prompt([{
                             type: 'input',
                             name: 'url',
-                            message: '(URL): ',
-                        }]).then((data, alt) => {
+                            message: '(Source): ',
+                        }]).then((data) => {
                                 addPart(`[${alt}](${data.url})`, section)
                             })
 
                         })
         break;
         case "Image":
-            inquirer
+            const pictureArray = [];
+            const pictureFolder = './images/'
+            fs.readdir(pictureFolder, (err, files) => {
+                files.forEach(file => pictureArray.push(file));
+                inquirer
                 .prompt([{
                     type: 'input',
                     name: 'alt',
-                    message: '![Alt Text]: ',
+                    message: '[Alt]: ',
                 }]).then((data) => {
                     const alt = data.alt;
                     inquirer
-                    .prompt([{
-                        type: 'input',
-                        name: 'url',
-                        message: '(Image Source): ',
-                    }]).then((data, alt) => {
-                            addPart(`![${alt}](${data.url})`, section)
-                        })
-                    })
+                        .prompt([{
+                            type: 'list',
+                            name: 'picture',
+                            message: 'Select a picture:',
+                            choices: pictureArray,
+                            pages: 8
+                        }]).then((data) => {
+                            addPart(`![${alt}](${pictureFolder}${data.picture})`, section)
+                        })})
+            });
         break;
-    }
-}
+}}
+
 
 const addPart = (part, section) => {
     console.log(part);
     console.log(section)
-    if (part === "Paragraph") readmeJSON[section] = `${readmeJSON[section]}${part}\n\n`
-    else readmeJSON[section] = `${readmeJSON[section]}${part}\n  `
+    if (part === "Paragraph") readmeJSON[section] = `${readmeJSON[section]}${part}\n  \n`
+    else readmeJSON[section] = `${readmeJSON[section]}${part}\n`
     const array = Object.entries(readmeJSON);
     const preview = previewReadme(array[0], array[1], array.splice(2, array.length - 2));
     console.log(`\n\n${preview}`);
@@ -276,6 +250,26 @@ const saveFile = (content) => {
         console.log('Saved!');
         commandMain();
       });
+}
+
+const commandClear = () => {
+    console.log(menus.base);
+    const array = Object.entries(readmeJSON);
+    const list = array.splice(2, array.length - 2).map(x => x[0]);
+    inquirer
+        .prompt([{
+            type: 'list',
+            name: 'command',
+            message: 'Clear: ',
+            choices: list,
+            pageSize: 8
+        }]).then((data) => {
+            console.log(`#${data.command} cleared!`)
+            readmeJSON[data.command] = "";
+            commandMain();
+        }).catch((err) => {
+            console.log(err);
+        })
 }
 
 commandMain();
