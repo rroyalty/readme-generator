@@ -10,10 +10,13 @@
 [Tests](#Tests)  
 [Questions](#Questions)  
 
-  ---
+---
 <a name="Description"></a>
 ### Description
 
+Paragraph one here!
+Paragraph 2 here!
+Paragraph 3
 ---
 <a name="Installation"></a>
 ### Installation

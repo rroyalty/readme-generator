@@ -21,11 +21,11 @@ const newReadme = () => {
                 choices: ['Description', 'Installation', 'Usage', 'License', 'Contributing', 'Tests', 'Questions']
             }
         ]).then((data) => {
-            readmeJSON["# Title"] = `# ${data.title}`;
-            readmeJSON["## Table of Contents"] = "";
+            readmeJSON["Title"] = `${data.title}`;
+            readmeJSON["Table of Contents"] = "";
             data.sections.forEach((ele) => {
-                readmeJSON["## Table of Contents"] = `${readmeJSON["## Table of Contents"]}\n[${ele}](#${ele})  `;
-                readmeJSON[`### ${ele}`] = "";
+                readmeJSON["Table of Contents"] = `${readmeJSON["Table of Contents"]}\n[${ele}](#${ele})  `;
+                readmeJSON[`${ele}`] = "";
             })
             commandMain();
         }).catch((err) => {
@@ -35,8 +35,8 @@ const newReadme = () => {
 
 const previewReadme = (title, toc, sections) => {
     const reduced = sections.reduce((accumulator, secEle) => { 
-        return `${accumulator}---\n<a name="${secEle[0].split(" ")[1]}"></a>\n${secEle[0]}\n\n${secEle[1]}`
-    }, `${title[1]}  \n\n${toc[0]}  \n${toc[1]}\n\n  `);
+        return `${accumulator}---\n<a name="${secEle[0]}"></a>\n### ${secEle[0]}\n\n${secEle[1]}`
+    }, `# ${title[1]}  \n\n## ${toc[0]}  \n${toc[1]}\n\n`);
     return reduced;
 }
 
@@ -102,11 +102,11 @@ const commandMain = () => {
                     commandMain();
                 break;
                 case 'help':
-                    helpMenus(dataArr[1]);
+                    helpMenus(dataArr[1].split(" ")[1]);
                     commandMain();
                 break;
                 case 'modify':
-                    modifyParts(dataArr[1]);
+                    modifyParts(dataArr[0].split(" ")[1]);
                     commandModify();
                 break;
                 case 'save':
@@ -220,10 +220,12 @@ const part2add = (part, section) => {
 }
 
 const addPart = (part, section) => {
+    console.log(part);
+    console.log(section)
     if (part === "Paragraph") readmeJSON[section] = `${readmeJSON[section]}${part}\n\n`
-    else readmeJSON[section] = readmeJSON[section] = `${readmeJSON[section]}${part}\n`
+    else readmeJSON[section] = `${readmeJSON[section]}${part}\n`
     const array = Object.entries(readmeJSON);
-    const preview = previewReadme(array[0], array.splice(1, array.length - 1));
+    const preview = previewReadme(array[0], array[1], array.splice(2, array.length - 2));
     console.log(`\n\n${preview}`);
     addPartPrompt(section);
 
@@ -233,8 +235,8 @@ const saveFile = (content) => {
     fs.writeFile('ReadMe.md', content, function (err) {
         if (err) throw err;
         console.log('Saved!');
+        commandMain();
       });
-    commandMain();
 }
 
 commandMain();
