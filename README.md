@@ -1,4 +1,4 @@
-# Title goes here!  
+# Ryan's ReadMe Generator!  
 
 ## Table of Contents  
 
@@ -9,33 +9,31 @@
 [Contributing](#Contributing)  
 [Tests](#Tests)  
 [Questions](#Questions)  
-
------
-<a name="#Description"></a>
+  ---
+<a name="Description"></a>
 ### Description
------
 
-<a name="#Installation"></a>
+---
+<a name="Installation"></a>
 ### Installation
------
 
-<a name="#Usage"></a>
+---
+<a name="Usage"></a>
 ### Usage
------
 
-<a name="#License"></a>
+---
+<a name="License"></a>
 ### License
------
 
-<a name="#Contributing"></a>
+---
+<a name="Contributing"></a>
 ### Contributing
------
 
-<a name="#Tests"></a>
+---
+<a name="Tests"></a>
 ### Tests
------
 
-<a name="#Questions"></a>
+---
+<a name="Questions"></a>
 ### Questions
------
 
