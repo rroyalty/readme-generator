@@ -14,26 +14,26 @@
 #Description
 
 ---
-<a name="#Installation"/>
+<a name="#Installation">
 #Installation
 
 ---
-<a name="#Usage"/>
+<a name="#Usage">
 #Usage
 
 ---
-<a name="#License"/>
+<a name="#License">
 #License
 
 ---
-<a name="#Contributing"/>
+<a name="#Contributing">
 #Contributing
 
 ---
-<a name="#Tests"/>
+<a name="#Tests">
 #Tests
 
 ---
-<a name="#Questions"/>
+<a name="#Questions">
 #Questions
 
