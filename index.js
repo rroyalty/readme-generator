@@ -18,14 +18,14 @@ const newReadme = () => {
                 message: 'What sections would you like to include in your ReadMe?',
                 name: 'sections',
                 pageSize: 8,
-                choices: ['#Description', '#Installation', '#Usage', '#License', '#Contributing', '#Tests', '#Questions']
+                choices: ['Description', 'Installation', 'Usage', 'License', 'Contributing', 'Tests', 'Questions']
             }
         ]).then((data) => {
-            readmeJSON["###Title"] = `###${data.title}`;
-            readmeJSON["##Table of Contents"] = "";
+            readmeJSON["# Title"] = `# ${data.title}`;
+            readmeJSON["## Table of Contents"] = "";
             data.sections.forEach((ele) => {
-                readmeJSON["##Table of Contents"] = `${readmeJSON["##Table of Contents"]}\n[${ele}](${ele})`;
-                readmeJSON[ele] = "";
+                readmeJSON["## Table of Contents"] = `${readmeJSON["## Table of Contents"]}\n[${ele}](${ele})  `;
+                readmeJSON[`### ${ele}`] = "";
             })
             commandMain();
         }).catch((err) => {
@@ -35,8 +35,8 @@ const newReadme = () => {
 
 const previewReadme = (title, toc, sections) => {
     const reduced = sections.reduce((accumulator, secEle) => { 
-        return `${accumulator}---\n<a name="${secEle[0]}"/>\n${secEle[0]}\n\n${secEle[1]}`
-    }, `${title[1]}\n---\n${toc[0]}\n${toc[1]}\n`);
+        return `${accumulator}---\n<a name="${secEle[0].split(" ")[1]}"></a>\n${secEle[0]}\n\n${secEle[1]}`
+    }, `${title[1]}  \n\n${toc[0]}  \n${toc[1]}\n  `);
     return reduced;
 }
 
@@ -192,7 +192,7 @@ const part2add = (part, section) => {
                         type: 'input',
                         name: 'url',
                         message: '(URL): ',
-                    }]).then((data, url) => {
+                    }]).then((data, alt) => {
                             addPart(`[${alt}](${data.url})`, section)
                         })
 
@@ -211,7 +211,7 @@ const part2add = (part, section) => {
                         type: 'input',
                         name: 'url',
                         message: '(Image Source): ',
-                    }]).then((data, url) => {
+                    }]).then((data, alt) => {
                             addPart(`![${alt}](${data.url})`, section)
                         })
                     })
