@@ -1,6 +1,8 @@
-# Title goes here!  
+# Title goes here!
+-----
 
-## Table of Contents  
+## Table of Contents
+-----
 [Description](#Description)  
 [Installation](#Installation)  
 [Usage](#Usage)  
