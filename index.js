@@ -87,9 +87,7 @@ const commandMain = () => {
             name: 'command',
             message: 'Enter command: '
         }]).then((data) => {
-            const dataArr = data.command.split(" ")
-            const array = Object.entries(readmeJSON);
-            const preview = previewReadme(array[0], array[1], array.splice(2, array.length - 2));
+            const dataArr = data.command.split(" ");
             switch(dataArr[0].toLowerCase()) {
                 case 'exit':
                     process.exit(0);
@@ -98,6 +96,8 @@ const commandMain = () => {
                     newReadme(readmeJSON);
                 break;
                 case 'preview':
+                    const array = Object.entries(readmeJSON);
+                    const preview = previewReadme(array[0], array[1], array.splice(2, array.length - 2));
                     console.log(`\n\n${preview}`);
                     commandMain();
                 break;
@@ -110,8 +110,9 @@ const commandMain = () => {
                     commandModify();
                 break;
                 case 'save':
-                    saveFile(preview);
-                    commandModify();
+                    const contentArr = Object.entries(readmeJSON);
+                    const content = previewReadme(contentArr[0], contentArr[1], contentArr.splice(2, contentArr.length - 2));
+                    saveFile(content);
                 break;
                 default:
                     console.log("Invalid command.")
@@ -125,7 +126,7 @@ const commandMain = () => {
 const commandModify = () => {
     console.log(menus.base);
     const array = Object.entries(readmeJSON);
-    const list = array.splice(1, array.length - 1).map(x => x[0]);
+    const list = array.splice(2, array.length - 2).map(x => x[0]);
     inquirer
         .prompt([{
             type: 'list',
