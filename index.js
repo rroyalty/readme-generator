@@ -14,6 +14,16 @@ const newReadme = () => {
                 message: 'What is the title of your project?'
             },
             {
+                type: 'input',
+                name: 'github',
+                message: 'What is your github username?'
+            },
+            {
+                type: 'input',
+                name: 'repo',
+                message: 'What is the name of your repository?'
+            },
+            {
                 type: 'checkbox',
                 message: 'What sections would you like to include in your ReadMe?',
                 name: 'sections',
@@ -21,7 +31,7 @@ const newReadme = () => {
                 choices: ['Description', 'Installation', 'Usage', 'License', 'Contributing', 'Tests', 'Questions']
             }
         ]).then((data) => {
-            readmeJSON["Title"] = `${data.title}`;
+            readmeJSON["Title"] = `![badge](https://img.shields.io/github/license/${data.github}/${data.repo})\n\n# ${data.title}`;
             readmeJSON["Table of Contents"] = "";
             data.sections.forEach((ele) => {
                 readmeJSON["Table of Contents"] = `${readmeJSON["Table of Contents"]}\n[${ele}](#${ele})  `;
@@ -36,7 +46,7 @@ const newReadme = () => {
 const previewReadme = (title, toc, sections) => {
     const reduced = sections.reduce((accumulator, secEle) => { 
         return `${accumulator}\n---\n<a name="${secEle[0]}"></a>\n### ${secEle[0]}\n\n${secEle[1]}`
-    }, `# ${title[1]}  \n\n## ${toc[0]}  \n${toc[1]}\n\n`);
+    }, `${title[1]}  \n\n## ${toc[0]}  \n${toc[1]}\n\n`);
     return reduced;
 }
 
