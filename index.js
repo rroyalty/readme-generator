@@ -88,6 +88,8 @@ const commandMain = () => {
             message: 'Enter command: '
         }]).then((data) => {
             const dataArr = data.command.split(" ")
+            const array = Object.entries(readmeJSON);
+            const preview = previewReadme(array[0], array[1], array.splice(2, array.length - 2));
             switch(dataArr[0].toLowerCase()) {
                 case 'exit':
                     process.exit(0);
@@ -96,8 +98,6 @@ const commandMain = () => {
                     newReadme(readmeJSON);
                 break;
                 case 'preview':
-                    const array = Object.entries(readmeJSON);
-                    const preview = previewReadme(array[0], array[1], array.splice(2, array.length - 2));
                     console.log(`\n\n${preview}`);
                     commandMain();
                 break;
@@ -107,6 +107,10 @@ const commandMain = () => {
                 break;
                 case 'modify':
                     modifyParts(dataArr[1]);
+                    commandModify();
+                break;
+                case 'save':
+                    saveFile(preview);
                     commandModify();
                 break;
                 default:
@@ -215,7 +219,6 @@ const part2add = (part, section) => {
 }
 
 const addPart = (part, section) => {
-
     if (part === "Paragraph") readmeJSON[section] = `${readmeJSON[section]}${part}\n\n`
     else readmeJSON[section] = readmeJSON[section] = `${readmeJSON[section]}${part}\n`
     const array = Object.entries(readmeJSON);
@@ -223,6 +226,14 @@ const addPart = (part, section) => {
     console.log(`\n\n${preview}`);
     addPartPrompt(section);
 
+}
+
+const saveFile = (content) => {
+    fs.writeFile('ReadMe.md', content, function (err) {
+        if (err) throw err;
+        console.log('Saved!');
+      });
+    commandMain();
 }
 
 commandMain();
