@@ -37,6 +37,7 @@ const newReadme = () => {
                 readmeJSON[`${ele}`] = "";
             }
             )
+            readmeJSON["Questions"] = `[GitHub](https://github.com/${data.github}/${data.repo})  \n[E-Mail](${data.email})`;
             commandMain();
         }).catch((err) => {
             console.log(err);
@@ -153,6 +154,34 @@ const commandModify = () => {
 }
 
 const addPartPrompt = (section) => {
+    if(section === "License") {
+        const licenseArray = [];
+        const licenseFolder = './licenses/'
+        fs.readdir(licenseFolder, (err, files) => {
+            files.forEach(file => licenseArray.push(file));
+            inquirer
+                .prompt([{
+                    type: 'list',
+                    name: 'license',
+                    message: 'Select a license',
+                    choices: licenseArray,
+                    pages: 8
+                }]).then((data) => {
+                    fs.readFile(`${licenseFolder}${data.license}`, 'utf-8', ((err, data) => {
+                        if (err) console.log(err);
+                        else readmeJSON["License"] = `${data}  \n`;
+                    }))
+                    fs.copyFile(`${licenseFolder}${data.license}`, `LICENSE`, ((err) => {
+                        if (err) console.log(err);
+                        else console.log(`${data.license} chosen!`);
+                        commandMain();
+                    }))
+
+                })
+        });
+        
+
+    } else {
     inquirer
         .prompt([{
             type: 'list',
@@ -175,7 +204,7 @@ const addPartPrompt = (section) => {
         }).catch((err) => {
             console.log(err);
         })
-}
+}}
 
 const part2add = (part, section) => {
     switch (part) {

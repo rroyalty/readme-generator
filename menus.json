@@ -1,6 +1,6 @@
 {
     "base":
-        "\nWELCOME TO RYAN'S README BUILDER!\n\nType 'Help' for general help.\nType 'Help <command>' for specific command Help\n\nCOMMANDS:\n[ New / Preview / Modify / Clear / Save / Exit ]\n\n",
+        "\nWELCOME TO RYAN'S README BUILDER!\n\nType 'Help' for general help.\nType 'Help <command>' for specific command Help\n\nCOMMANDS:\n[ New / Preview / Modify / Save / Exit ]\n\n",
     "help":
         "This program is used to generate a markup document to be used as a readme for coding projects!\n\nThe basic commands are:\nNew - creates a new readme object for the user to add to and modify.\nPreview - Previews the readme document in the terminal.\nModify - Modifies specific sections of the readme doc. (Requires parameter)\nClear - Clears the readme document.\nSave - saves the readme document to a file.\nExit - Exits the program\n\n",
     "modify":
