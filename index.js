@@ -35,7 +35,7 @@ const newReadme = () => {
 
 const previewReadme = (title, toc, sections) => {
     const reduced = sections.reduce((accumulator, secEle) => { 
-        return `${accumulator}---\n<a name="${secEle[0]}"></a>\n### ${secEle[0]}\n\n${secEle[1]}`
+        return `${accumulator}\n---\n<a name="${secEle[0]}"></a>\n### ${secEle[0]}\n\n${secEle[1]}`
     }, `# ${title[1]}  \n\n## ${toc[0]}  \n${toc[1]}\n\n`);
     return reduced;
 }
@@ -188,15 +188,15 @@ const part2add = (part, section) => {
                 }]).then((data) => {
                     const alt = data.alt;
                     inquirer
-                    .prompt([{
-                        type: 'input',
-                        name: 'url',
-                        message: '(URL): ',
-                    }]).then((data, alt) => {
-                            addPart(`[${alt}](${data.url})`, section)
-                        })
+                        .prompt([{
+                            type: 'input',
+                            name: 'url',
+                            message: '(URL): ',
+                        }]).then((data, alt) => {
+                                addPart(`[${alt}](${data.url})`, section)
+                            })
 
-                    })
+                        })
         break;
         case "Image":
             inquirer
@@ -223,7 +223,7 @@ const addPart = (part, section) => {
     console.log(part);
     console.log(section)
     if (part === "Paragraph") readmeJSON[section] = `${readmeJSON[section]}${part}\n\n`
-    else readmeJSON[section] = `${readmeJSON[section]}${part}\n`
+    else readmeJSON[section] = `${readmeJSON[section]}${part}\n  `
     const array = Object.entries(readmeJSON);
     const preview = previewReadme(array[0], array[1], array.splice(2, array.length - 2));
     console.log(`\n\n${preview}`);
@@ -232,7 +232,7 @@ const addPart = (part, section) => {
 }
 
 const saveFile = (content) => {
-    fs.writeFile('ReadMe.md', content, function (err) {
+    fs.writeFile('README.md', content, function (err) {
         if (err) throw err;
         console.log('Saved!');
         commandMain();
