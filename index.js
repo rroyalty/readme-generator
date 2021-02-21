@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const menus = require('./menus.json');
+const sections = ['Description', 'Installation', 'Usage', 'License', 'Contributing', 'Tests', 'Questions'];
 
 let readmeJSON = {};
 
@@ -20,23 +21,22 @@ const newReadme = () => {
             },
             {
                 type: 'input',
-                name: 'repo',
-                message: 'What is the name of your repository?'
+                name: 'email',
+                message: 'What is your e-mail address?'
             },
             {
-                type: 'checkbox',
-                message: 'What sections would you like to include in your ReadMe?',
-                name: 'sections',
-                pageSize: 8,
-                choices: ['Description', 'Installation', 'Usage', 'License', 'Contributing', 'Tests', 'Questions']
+                type: 'input',
+                name: 'repo',
+                message: 'What is the name of your repository?'
             }
         ]).then((data) => {
             readmeJSON["Title"] = `![badge](https://img.shields.io/github/license/${data.github}/${data.repo})\n\n# ${data.title}`;
             readmeJSON["Table of Contents"] = "";
-            data.sections.forEach((ele) => {
+            sections.forEach((ele) => {
                 readmeJSON["Table of Contents"] = `${readmeJSON["Table of Contents"]}\n[${ele}](#${ele})  `;
                 readmeJSON[`${ele}`] = "";
-            })
+            }
+            )
             commandMain();
         }).catch((err) => {
             console.log(err);
