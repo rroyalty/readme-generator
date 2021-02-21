@@ -1,4 +1,4 @@
-# Ryan's ReadMe Generator!  
+# Ryan's ReadMe Generator  
 
 ## Table of Contents  
 
@@ -9,6 +9,7 @@
 [Contributing](#Contributing)  
 [Tests](#Tests)  
 [Questions](#Questions)  
+
   ---
 <a name="Description"></a>
 ### Description

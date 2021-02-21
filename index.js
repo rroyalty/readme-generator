@@ -36,7 +36,7 @@ const newReadme = () => {
 const previewReadme = (title, toc, sections) => {
     const reduced = sections.reduce((accumulator, secEle) => { 
         return `${accumulator}---\n<a name="${secEle[0].split(" ")[1]}"></a>\n${secEle[0]}\n\n${secEle[1]}`
-    }, `${title[1]}  \n\n${toc[0]}  \n${toc[1]}\n  `);
+    }, `${title[1]}  \n\n${toc[0]}  \n${toc[1]}\n\n  `);
     return reduced;
 }
 
