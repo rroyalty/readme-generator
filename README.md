@@ -1,6 +1,6 @@
-###Title goes here!
+### Title goes here!
 ---
-##Table of Contents
+## Table of Contents
 
 [#Description](#Description)
 [#Installation](#Installation)
@@ -11,29 +11,29 @@
 [#Questions](#Questions)
 ---
 <a name="#Description"></a>
-#Description
+# Description
 
 ---
 <a name="#Installation"></a>
-#Installation
+# Installation
 
 ---
 <a name="#Usage"></a>
-#Usage
+# Usage
 
 ---
 <a name="#License"></a>
-#License
+# License
 
 ---
 <a name="#Contributing"></a>
-#Contributing
+# Contributing
 
 ---
 <a name="#Tests"></a>
-#Tests
+# Tests
 
 ---
 <a name="#Questions"></a>
-#Questions
+# Questions
 
