@@ -5,6 +5,8 @@ const sections = ['Description', 'Installation', 'Usage', 'License', 'Contributi
 
 let readmeJSON = {};
 
+
+// This block of code runs after selecting New in CLI.
 const newReadme = () => {
     readmeJSON = {};
     inquirer
@@ -44,6 +46,7 @@ const newReadme = () => {
         })
 }
 
+// Previews the current markdown that will appear in the markdown file.
 const previewReadme = (title, toc, sections) => {
     const reduced = sections.reduce((accumulator, secEle) => { 
         return `${accumulator}\n---\n<a name="${secEle[0]}"></a>\n### ${secEle[0]}\n\n${secEle[1]}`
@@ -51,11 +54,12 @@ const previewReadme = (title, toc, sections) => {
     return reduced;
 }
 
+// Console logs the help menu.
 const helpMenus = () => {
     console.log(menus.help);
 }
 
-
+// The main menu for the program. Runs upon executing index.js in Node.
 const commandMain = () => {
     console.log(menus.base);
     inquirer
@@ -102,6 +106,7 @@ const commandMain = () => {
         })
 }
 
+// Modify menus for program.
 const commandModify = () => {
     console.log(menus.base);
     const array = Object.entries(readmeJSON);
@@ -121,6 +126,7 @@ const commandModify = () => {
         })
 }
 
+// Add Another Part prompt.
 const addPartPrompt = (section) => {
     if(section === "License") {
         const licenseArray = [];
@@ -174,6 +180,7 @@ const addPartPrompt = (section) => {
         })
 }}
 
+// Type of Part to Add Prompt.
 const part2add = (part, section) => {
     switch (part) {
         case "Paragraph":
@@ -231,7 +238,7 @@ const part2add = (part, section) => {
         break;
 }}
 
-
+// Script that actually adds part.
 const addPart = (part, section) => {
     console.log(part);
     console.log(section)
@@ -244,6 +251,7 @@ const addPart = (part, section) => {
 
 }
 
+// Saves the markdown file.
 const saveFile = (content) => {
     fs.writeFile('README.md', content, function (err) {
         if (err) throw err;
@@ -252,6 +260,7 @@ const saveFile = (content) => {
       });
 }
 
+// Clears the section of the ReadMe you specify.
 const commandClear = () => {
     console.log(menus.base);
     const array = Object.entries(readmeJSON);
@@ -272,4 +281,5 @@ const commandClear = () => {
         })
 }
 
+// Init function.
 commandMain();
